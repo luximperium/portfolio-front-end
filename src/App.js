@@ -1,23 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import AppBar from "./components/appbar";
+import Footer from "./components/footer";
+import Main from "./components/main";
+import { ThemeProvider, createMuiTheme, makeStyles } from "@material-ui/core";
+import { BrowserRouter as Router } from "react-router-dom";
+import MilkyWay from './assets/milkyway.jpg'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#e65100",
+    },
+    secondary: {
+      main: "#ffa500",
+    },
+  },
+});
+
+const useStyles = makeStyles({
+  main: {
+    position: "relative",
+    margin: "8px",
+  },
+  appbar: {
+    margin: "8px",
+  },
+});
 
 function App() {
+  const classes = useStyles();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <AppBar className={classes.appbar} />
+          <Main className={classes.main} />
+        </Router>
+        <Footer />
+      </ThemeProvider>
     </div>
   );
 }
